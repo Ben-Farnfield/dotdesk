@@ -46,9 +46,11 @@ def install(args):
     if install_icon:
         while True:
             icon_path = raw_input("Enter path to icon: ")
-            if os.path.isfile(icon_path)
+            if os.path.isfile(icon_path):
                 # need to think about local vs global
-                (__, dirnames, __) = os.walk().next()
+                # (__, dirnames, __) = os.walk().next()
+                print "Icon Path: " + icon_path
+                break
             else:
                 print "Icon not found!"
             
@@ -57,7 +59,7 @@ def install(args):
     print "Tooltip: " + tooltip
     print "Terminal: " + str(terminal)
     print "Install Icon: " + str(install_icon)
-    print "Icon Path: " + icon_path
+    print "Global: " + str(is_global_install())
 
 
 def desk_installed(program):
@@ -73,6 +75,9 @@ def read_Y_n(prompt):
             return False
         else:
             print "You need to enter Y or n"
+
+def is_global_install():
+    return getpass.getuser() is "root"
 
 
 #~ def install_icons(args):
