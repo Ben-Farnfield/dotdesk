@@ -3,6 +3,7 @@
 import argparse
 import getpass
 import shutil
+import sys
 import os
 
 # Install Dir's ---------------------------------------------------------------
@@ -27,13 +28,52 @@ def get_args():
                         #~ help=("Generate dotdoc directory. Pass your "
                               #~ "programs name as the argument"))
     return parser.parse_args()
-    
 
-def is_installed(desktop):
-    return os.path.isfile()
 
-def install():
-    print "test"
+def install(args):
+    # Get program name.
+    program = args.i
+    # Check if .desktop has already been installed.
+    if desk_installed(program):
+        print program + ".desktop is already installed!"
+        sys.exit()
+    # Ask user to input a tooltip.
+    tooltip = raw_input("Enter tooltip: ")
+    # Ask user if program is a terminal application.
+    terminal = read_Y_n("Terminal app? Y/n: ")
+    # Ask user if they wish to install an icon.
+    install_icon = read_Y_n("Do you wish to install an icon? Y/n: ")
+    if install_icon:
+        while True:
+            icon_path = raw_input("Enter path to icon: ")
+            if os.path.isfile(icon_path)
+                # need to think about local vs global
+                (__, dirnames, __) = os.walk().next()
+            else:
+                print "Icon not found!"
+            
+            
+    print "Program: " + program
+    print "Tooltip: " + tooltip
+    print "Terminal: " + str(terminal)
+    print "Install Icon: " + str(install_icon)
+    print "Icon Path: " + icon_path
+
+
+def desk_installed(program):
+    return os.path.isfile(_global_desk_dir + program + ".desktop")
+
+
+def read_Y_n(prompt):
+    while True:
+        Y_n = raw_input(prompt)
+        if Y_n is "Y" or Y_n is "y":
+            return True
+        elif Y_n is "N" or Y_n is "n":
+            return False
+        else:
+            print "You need to enter Y or n"
+
 
 #~ def install_icons(args):
     #~ icon_name = (PROG+"."+args.install)
@@ -68,14 +108,14 @@ def install():
 
 #_wrk_dir = os.getcwd()
 
-args = get_args()
+_args = get_args()
 
-if args.i:
+if _args.i:
     print "install"
-    
-elif args.r:
+    install(_args)
+elif _args.r:
     print "remove"
-elif args.g:
+elif _args.g:
     print "generate"
 else:
     print "Try 'setup.py --help'"
