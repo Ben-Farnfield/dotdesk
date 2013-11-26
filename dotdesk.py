@@ -31,39 +31,58 @@ def get_args():
 
 
 def install(args):
+    desktop_contents = []
+    
     # Get program name.
     program = args.i
     # Check if .desktop has already been installed.
     if desk_installed(program):
         print program + ".desktop is already installed!"
         sys.exit()
+    else:
+        desktop_contents.append(program)
+    
+    desktop_contents = desktop_install_cli(desktop_contents)
+    
+    # DEBUG
+    for i in range(len(desktop_contents)):
+        print desktop_contents[i]
+
+
+def desktop_install_cli(desktop_contents):
     # Ask user to input a tooltip.
-    tooltip = raw_input("Enter tooltip: ")
+    desktop_contents.append(raw_input("Enter tooltip: "))
     # Ask user if program is a terminal application.
-    terminal = read_Y_n("Terminal app? Y/n: ")
+    desktop_contents.append(read_Y_n("Terminal app? Y/n: "))
     # Ask user if they wish to install an icon.
     install_icon = read_Y_n("Do you wish to install an icon? Y/n: ")
     if install_icon:
+        icon_paths = []
+        icon_sizes = []
         while True:
-            icon_path = raw_input("Enter path to icon: ")
-            if os.path.isfile(icon_path):
-                # need to think about local vs global
-                # (__, dirnames, __) = os.walk().next()
-                print "Icon Path: " + icon_path
-                break
+            tmp = raw_input("Enter path to icon: ")
+            if file_exists(tmp):
+                icon_paths.append(tmp)
+                if is_global_install():
+                    icon_sizes = select_icon_size(icon_sizes)
+                # Ask if they wish to install additional icons.
+                if not read_Y_n("Install another icon? Y/n: "):
+                    break
             else:
                 print "Icon not found!"
-            
-            
-    print "Program: " + program
-    print "Tooltip: " + tooltip
-    print "Terminal: " + str(terminal)
-    print "Install Icon: " + str(install_icon)
-    print "Global: " + str(is_global_install())
+        desktop_contents.append(icon_paths)
+        desktop_contents.append(icon_sizes)
+    # Ask user for execution command.
+    desktop_contents.append(raw_input("Enter execution command: "))
+    return desktop_contents
 
 
 def desk_installed(program):
     return os.path.isfile(_global_desk_dir + program + ".desktop")
+
+
+def file_exists(filename):
+    return os.path.isfile(filename)
 
 
 def read_Y_n(prompt):
@@ -77,7 +96,28 @@ def read_Y_n(prompt):
             print "You need to enter Y or n"
 
 def is_global_install():
-    return getpass.getuser() is "root"
+    return getpass.getuser() == "root"
+
+
+def select_icon_size(icon_sizes):
+    # Print hicolor/ dirs so user can select icon size.
+    (__, dirnames, __) = os.walk("/usr/share/icons/hicolor").next()
+    for i in range(len(dirnames)):
+        print "[" + str(i) + "] " + str(dirnames[i])
+    # Ask user what size icon they are installing.
+    while True:
+        tmp = int(raw_input("Select icon size 0-" + 
+                            str(len(dirnames)-1) + ": "))
+        if tmp >= 0 and tmp < len(dirnames):
+            icon_sizes.append(dirnames[int(tmp)])
+            break
+        else:
+            print "Invalid selection!"
+    return icon_sizes
+
+
+def generate_dot_desktop():
+    print "hello"
 
 
 #~ def install_icons(args):
@@ -114,6 +154,8 @@ def is_global_install():
 #_wrk_dir = os.getcwd()
 
 _args = get_args()
+
+print is_global_install()
 
 if _args.i:
     print "install"
