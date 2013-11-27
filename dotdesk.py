@@ -1,96 +1,87 @@
 #! /usr/bin/python
 
+'''
+
+'''
+
+
+import getpass
+
 from model.dot_desk_model import DotDeskModel
+from util import util
 from view import view
 
-import argparse
-import getpass
-import shutil
-import sys
-import os
+
+__author__ = "Ben Farnfield"
+__email__ = "ben.farnfield@gmail.com"
+
+__license__ = ""
+
 
 # Install Dir's --------------------------------------------------------------
 
 _home = "/home/" + getpass.getuser() + "/"
 
-_global_icon_dir = "/usr/share/icons/hicolor/{size}/apps/"
+_icon_theme = "/usr/share/icons/hicolor/"
+
+_global_icon_dir = _icon_theme + "{size}/apps/"
 _local_icon_dir = _home + ".icons/"
 
 _global_desk_dir = "/usr/share/applications/"
 _local_desk_dir = _home + ".local/share/applications/"
 
-_icon_source = None
+_icon_to_install = None
+
 _icon_name = None
 
-# ----------------------------------------------------------------------------
 
-# Get arguments passed by user.
-def get_args():
-    parser = argparse.ArgumentParser(prog="dotdoc")
-    parser.add_argument("-i", help="Install .desktop and icons.")
-    #~ parser.add_argument("-r", action="store_true",
-                        #~ help="Remove .desktop and icons")
-    return parser.parse_args()
 
-# Check to see if file is installed.
-def file_exists(filename):
-    return os.path.isfile(filename)
+# Install .desktop ------------------------------------------------------------
 
-# Check to see if script has been run as root.
-def is_global_install():
-    return getpass.getuser() == "root"
-
-# Install .desktop
 def install(args):
-    # Get program name.
-    program = args.i
-    # Check if .desktop has already been installed.
-    if file_exists(_global_desk_dir + program + ".desktop"):
-        print program + ".desktop is already installed!"
-        sys.exit()
-    else:
-        # Create .desktop model.    
-        dotdesk = DotDeskModel(program)
 
-    dotdesk.tooltip = view.prompt_string("Enter tooltip")
-    dotdesk.terminal = view.prompt_Y_n("Terminal app?")
-    # Ask use if they wish to install an icon.
-    install_icon = view.prompt_Y_n("Do you wish to install an icon?")
-    # If they wish to install an icon prompt for icon path.
-    if install_icon:
-        while True:
-            icon_path = view.prompt_string("Enter icon path")
-            if file_exists(icon_path):
-                _icon_source = icon_path
-                split_path = _icon_source.split("/")
-                _icon_name = split_path[len(split_path)-1]
-                break
-            else:
-                print "Icon not found!"
-    # If is root user prompt for icon size.
-    if is_global_install():
-        # List all the possible sizes.
-        dir_names = view.output_dirs("/usr/share/icons/hicolor")
-        # Ask user to select icon size.
-        while True:
-            prompt = "Select icon size 0 .. " + str(len(dir_names)-1)
-            selection = int(view.prompt_string(prompt))
-            if selection >= 0 and selection < len(dir_names):
-                icon_size = dir_names[selection]
-                dotdesk.icon = (_global_icon_dir.format(size=icon_size) 
-                                + _icon_name)
-                break
-            else:
-                print "Invalid selection!"
-    else:
-        dotdesk.icon = _local_icon_dir + _icon_name
-    dotdesk.exe = view.prompt_string("Enter execution command")
+	program = args.i
+
+	does_dotdesk_exist = util.make_does_dotdesk_exist(program)
+	does_dotdesk_exist(_global_desk_dir) # exit if .desktop exists
+	does_dotdesk_exist(_local_desk_dir)
+
+	dotdesk = DotDeskModel(program)
+
+	dotdesk.tooltip = view.prompt_string("Enter tooltip")
+
+	dotdesk.terminal = view.prompt_Y_n("Terminal app?")
+
+	yes_install_icon = view.prompt_Y_n("Install icon?")
+
+	if yes_install_icon:
+		_icon_to_install = view.prompt_path("Enter icon path",
+											"Icon not found.")
+
+		_icon_name = util.extract_file_name_from_path(_icon_to_install)
+		
+		if util.is_root_install(): # we need to know the icon size.
+		
+			dir_names = util.get_dirs(_icon_theme) # get list of icon sizes
+			num_sizes = len(dir_names) # get number of icon sizes available
+			
+			while True:
+				print "Available icon sizes:"
+				view.print_dirs(_icon_theme) # print icon sizes
+				select = view.prompt_select("Select 0-" + str(num_sizes-1),
+											"Selection not available.",
+											num_sizes)
+				icon_size = dir_names[select]
+				dotdesk.icon = (_global_icon_dir.format(size=icon_size) 
+								+ _icon_name)
+				break
+		else:
+			dotdesk.icon = _local_icon_dir + _icon_name
+
+	dotdesk.exe = view.prompt_string("Enter execution command")
     
-    #DEBUG
-    print dotdesk.to_string()
-
-def generate_dot_desktop():
-    pass
+	#DEBUG
+	print dotdesk.to_string()
 
 
 #~ def install_icons(args):
@@ -126,7 +117,7 @@ def generate_dot_desktop():
 
 #_wrk_dir = os.getcwd()
 
-_args = get_args()
+_args = util.get_args()
 
 if _args.i:
     install(_args)
