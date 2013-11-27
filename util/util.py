@@ -26,12 +26,12 @@ def get_args():
 
 # Check if .desktop is already installed.
 def make_does_dotdesk_exist(program):
-	def does_dotdesk_exist(directory):
-		if file_exists(directory + program + ".desktop"):
-			print program + ".desktop is already installed!"
-			sys.exit()
+    def does_dotdesk_exist(directory):
+        if file_exists(directory + program + ".desktop"):
+            print program + ".desktop is already installed!"
+            sys.exit()
 
-	return does_dotdesk_exist
+    return does_dotdesk_exist
 
 # Check to see if script run by root user.
 def is_root_install():
@@ -43,10 +43,10 @@ def file_exists(filename):
 
 # Extract file name form end of path.
 def extract_file_name_from_path(path):
-	split_path = path.split("/")
-	return split_path[len(split_path)-1]
-			
+    split_path = path.split("/")
+    return split_path[len(split_path)-1]
+
 # Get all directories contained within this folder.    
 def get_dirs(path):
-	(__, dir_names, __) = os.walk(path).next()
-	return dir_names
+    (__, dir_names, __) = os.walk(path).next()
+    return dir_names

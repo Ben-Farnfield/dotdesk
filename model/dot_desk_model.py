@@ -17,7 +17,7 @@ class DotDeskModel:
         self.terminal = ""
         self.icon = ""
         self.exe = ""
-        
+
     def to_string(self):
         return ("[Desktop Entry]\n" +
         "Version=1.0\n" +

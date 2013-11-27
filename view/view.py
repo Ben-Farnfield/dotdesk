@@ -27,21 +27,21 @@ def prompt_Y_n(prompt):
             print "You need to enter Y or n"
 
 def prompt_path(prompt, error):
-	while True:
-		path = prompt_string(prompt)
-		if util.file_exists(path):
-			return path
-		else:
-			print error
+    while True:
+        path = prompt_string(prompt)
+        if util.file_exists(path):
+            return path
+        else:
+            print error
 
 def prompt_select(prompt, error, num_options):
-	while True:
-		select = int(prompt_string(prompt))
-		if select >= 0 and select < num_options:
-			return select
-		else:
-			print error
-            
+    while True:
+        select = int(prompt_string(prompt))
+        if select >= 0 and select < num_options:
+            return select
+        else:
+            print error
+
 def print_dirs(path):
     dir_names = util.get_dirs(path)
     for i in range(len(dir_names)):
