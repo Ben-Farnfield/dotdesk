@@ -21,6 +21,8 @@ def install(args):
     does_dotdesk_exist(const.GLOBAL_DESK_DIR) # exit if .desktop exists
     does_dotdesk_exist(const.LOCAL_DESK_DIR)
 
+    view.print_header("install", program)
+
     dotdesk = DotDeskModel(program)
 
     dotdesk = run_install_cli(dotdesk)
@@ -78,9 +80,10 @@ def run_install_cli(dotdesk):
 
 
 def run_install_icon(dotdesk):
-    icon_name = util.extract_file_name_from_path(dotdesk.icon_to_install)
-    print "Installing icon " + icon_name
-    shutil.copyfile(dotdesk.icon_to_install, dotdesk.icon)
+    if dotdesk.icon != "":
+        icon_name = util.extract_file_name_from_path(dotdesk.icon_to_install)
+        print "Installing icon " + icon_name
+        shutil.copyfile(dotdesk.icon_to_install, dotdesk.icon)
 
 
 def run_install_desktop(dotdesk):
