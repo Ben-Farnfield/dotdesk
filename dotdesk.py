@@ -31,7 +31,7 @@ def install(args):
 
     run_install_icon(dotdesk)
 
-    run_install_dotdesk(dotdesk)
+    run_install_desktop(dotdesk)
 
 
 def run_install_cli(dotdesk):
@@ -83,7 +83,7 @@ def run_install_icon(dotdesk):
     shutil.copyfile(dotdesk.icon_to_install, dotdesk.icon)
 
 
-def run_install_dotdesk(dotdesk):
+def run_install_desktop(dotdesk):
     prog_name = dotdesk.name
     print "Installing " + prog_name + ".desktop"
     
@@ -95,9 +95,6 @@ def run_install_dotdesk(dotdesk):
     desktop = open(install_dir + prog_name + ".desktop", "w")
     desktop.write(str(dotdesk))
     desktop.close()
-
-
-# -----------------------------------------------------------------------------
 
 #~ def install_icons(args):
     #~ icon_name = (PROG+"."+args.install)
@@ -128,7 +125,20 @@ def run_install_dotdesk(dotdesk):
     #~ print "Removing .desktop file"
     #~ os.remove("/usr/share/applications/"+PROG+".desktop")
 
-# -----------------------------------------------------------------------------
+
+# Remove .desktop -------------------------------------------------------------
+
+def remove():
+    run_remove_icon()
+    run_remove_desktop()
+
+
+def run_remove_icon():
+    pass
+
+
+def run_remove_desktop():
+    pass
 
 
 # Main ------------------------------------------------------------------------
@@ -137,10 +147,8 @@ _args = util.get_args()
 
 if _args.i:
     install(_args)
-#elif _args.r:
-#    print "remove"
-#elif _args.g:
-#    print "generate"
+elif _args.r:
+    remove()
 else:
     print "Try 'setup.py --help'"
 
