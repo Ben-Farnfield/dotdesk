@@ -55,9 +55,9 @@ def run_install_cli(dotdesk):
             dir_names = util.get_dirs(const.ICON_THEME) # get icon size list
             num_sizes = len(dir_names) # get number of icon sizes available
 
-            print "Available icon sizes:"
+            print "\nSelect icon size:"
             view.print_list(dir_names) # print all icon sizes
-            select = view.prompt_select("Select 0-" + str(num_sizes-1),
+            select = view.prompt_select("0-" + str(num_sizes-1),
                                         "Selection not available.",
                                         num_sizes)
             icon_size = dir_names[select]
@@ -68,10 +68,10 @@ def run_install_cli(dotdesk):
 
     dotdesk.exe = view.prompt_string("Enter execution command")
 
-    print "Available categories:"
+    print "\nSelect a category:\n"
     view.print_list(const.CATEGORIES_LIST) # print all categories
     num_cat = len(const.CATEGORIES_LIST)
-    select = view.prompt_select("Select 0-" + str(num_cat-1),
+    select = view.prompt_select("0-" + str(num_cat-1),
                                 "Selection not available.",
                                 num_cat)
     dotdesk.category = const.CATEGORIES_LIST[select]

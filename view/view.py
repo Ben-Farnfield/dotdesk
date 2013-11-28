@@ -7,12 +7,12 @@ from util import util
 from util import const
 
 def prompt_string(prompt):
-    return raw_input(prompt + ": ")
+    return raw_input("\n> " + prompt + ": ")
 
 
 def prompt_Y_n(prompt):
     while True:
-        Y_n = raw_input(prompt + " Y/n: ")
+        Y_n = prompt_string(prompt + " Y/n")
         if Y_n is "Y" or Y_n is "y":
             return True
         elif Y_n is "N" or Y_n is "n":
