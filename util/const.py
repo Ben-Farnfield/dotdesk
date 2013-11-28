@@ -37,3 +37,12 @@ CATEGORIES_LIST = ["AudioVideo",
                    "Settings",
                    "System",
                    "Utility"]
+
+
+DOTDESK_HEADER = ("\n" +
+                  "--|dotdesk|---------------------------------\n" +
+                  "\n" +
+                  "Ready to {action} {name}.desktop\n" +
+                  "\n" +
+                  "--------------------------------------------\n" +
+                  "\n")

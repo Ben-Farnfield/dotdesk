@@ -4,6 +4,7 @@
 '''
 
 from util import util
+from util import const
 
 def prompt_string(prompt):
     return raw_input(prompt + ": ")
@@ -46,3 +47,7 @@ def print_list(list_to_print):
             select = "[" + str(i) + "] "
             
         print select + str(list_to_print[i])
+
+
+def print_header(action, name):
+    print const.DOTDESK_HEADER.format(action=action, name=name)
