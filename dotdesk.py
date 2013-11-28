@@ -4,37 +4,10 @@
 
 '''
 
-
-import getpass
-
 from model.dot_desk_model import DotDeskModel
 from util import util
+from util import const
 from view import view
-
-
-__author__ = "Ben Farnfield"
-__email__ = "ben.farnfield@gmail.com"
-
-__license__ = ""
-
-
-# Install Dir's --------------------------------------------------------------
-
-_home = "/home/" + getpass.getuser() + "/"
-
-_icon_theme = "/usr/share/icons/hicolor/"
-
-_global_icon_dir = _icon_theme + "{size}/apps/"
-_local_icon_dir = _home + ".icons/"
-
-_global_desk_dir = "/usr/share/applications/"
-_local_desk_dir = _home + ".local/share/applications/"
-
-_icon_to_install = None
-
-_icon_name = None
-
-
 
 # Install .desktop ------------------------------------------------------------
 
@@ -43,10 +16,21 @@ def install(args):
     program = args.i
 
     does_dotdesk_exist = util.make_does_dotdesk_exist(program)
-    does_dotdesk_exist(_global_desk_dir) # exit if .desktop exists
-    does_dotdesk_exist(_local_desk_dir)
+    does_dotdesk_exist(const.GLOBAL_DESK_DIR) # exit if .desktop exists
+    does_dotdesk_exist(const.LOCAL_DESK_DIR)
 
     dotdesk = DotDeskModel(program)
+
+    dotdesk = run_install_cli(dotdesk)
+
+    #DEBUG
+    print dotdesk
+    print "icon_to_install=" + dotdesk.icon_to_install
+
+    run_install_dotdesk(dotdesk)
+
+
+def run_install_cli(dotdesk):
 
     dotdesk.tooltip = view.prompt_string("Enter tooltip")
 
@@ -55,34 +39,44 @@ def install(args):
     yes_install_icon = view.prompt_Y_n("Install icon?")
 
     if yes_install_icon:
-        _icon_to_install = view.prompt_path("Enter icon path",
-                                            "Icon not found.")
+        dotdesk.icon_to_install = view.prompt_path("Enter icon path",
+                                                   "Icon not found.")
 
-        _icon_name = util.extract_file_name_from_path(_icon_to_install)
+        icon_name = util.extract_file_name_from_path(dotdesk.icon_to_install)
 
         if util.is_root_install(): # we need to know the icon size.
 
-            dir_names = util.get_dirs(_icon_theme) # get list of icon sizes
+            dir_names = util.get_dirs(const.ICON_THEME) # get icon size list
             num_sizes = len(dir_names) # get number of icon sizes available
 
-            while True:
-                print "Available icon sizes:"
-                view.print_dirs(_icon_theme) # print icon sizes
-                select = view.prompt_select("Select 0-" + str(num_sizes-1),
-                                            "Selection not available.",
-                                            num_sizes)
-                icon_size = dir_names[select]
-                dotdesk.icon = (_global_icon_dir.format(size=icon_size) 
-                                + _icon_name)
-                break
+            print "Available icon sizes:"
+            view.print_list(dir_names) # print all icon sizes
+            select = view.prompt_select("Select 0-" + str(num_sizes-1),
+                                        "Selection not available.",
+                                        num_sizes)
+            icon_size = dir_names[select]
+            dotdesk.icon = (const.GLOBAL_ICON_DIR.format(size=icon_size) 
+                            + icon_name)
         else:
-            dotdesk.icon = _local_icon_dir + _icon_name
+            dotdesk.icon = const.LOCAL_ICON_DIR + icon_name
 
     dotdesk.exe = view.prompt_string("Enter execution command")
 
-    #DEBUG
-    print dotdesk.to_string()
+    print "Available categories:"
+    view.print_list(const.CATEGORIES_LIST) # print all categories
+    num_cat = len(const.CATEGORIES_LIST)
+    select = view.prompt_select("Select 0-" + str(num_cat-1),
+                                "Selection not available.",
+                                num_cat)
+    dotdesk.category = const.CATEGORIES_LIST[select]
 
+    return dotdesk
+
+
+def run_install_dotdesk(dotdesk):
+    pass
+
+# -----------------------------------------------------------------------------
 
 #~ def install_icons(args):
     #~ icon_name = (PROG+"."+args.install)

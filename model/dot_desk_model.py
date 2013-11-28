@@ -1,10 +1,3 @@
-
-__author__ = "Ben Farnfield"
-__email__ = "ben.farnfield@gmail.com"
-
-__license__ = ""
-
-
 class DotDeskModel:
 
     '''
@@ -17,8 +10,11 @@ class DotDeskModel:
         self.terminal = ""
         self.icon = ""
         self.exe = ""
+        self.category = ""
+        self.icon_to_install = ""
 
-    def to_string(self):
+
+    def __str__(self):
         return ("[Desktop Entry]\n" +
         "Version=1.0\n" +
         "Type=Application\n" + 
@@ -28,4 +24,4 @@ class DotDeskModel:
         "Icon=" + self.icon + "\n" +
         "Exec=" + self.exe + "\n" +
         "Terminal=" + str(self.terminal) + "\n" +
-        "Categories=TBC")
+        "Categories=" + self.category)
