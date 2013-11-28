@@ -23,7 +23,7 @@ GLOBAL_DESK_DIR = "/usr/share/applications/"
 LOCAL_DESK_DIR = HOME + ".local/share/applications/"
 
 
-#
+# List of all available program categories.
 CATEGORIES_LIST = ["AudioVideo",
                    "Audio",
                    "Video",

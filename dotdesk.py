@@ -4,6 +4,8 @@
 
 '''
 
+import shutil
+
 from model.dot_desk_model import DotDeskModel
 from util import util
 from util import const
@@ -26,6 +28,8 @@ def install(args):
     #DEBUG
     print dotdesk
     print "icon_to_install=" + dotdesk.icon_to_install
+
+    run_install_icon(dotdesk)
 
     run_install_dotdesk(dotdesk)
 
@@ -73,8 +77,25 @@ def run_install_cli(dotdesk):
     return dotdesk
 
 
+def run_install_icon(dotdesk):
+    icon_name = util.extract_file_name_from_path(dotdesk.icon_to_install)
+    print "Installing icon " + icon_name
+    shutil.copyfile(dotdesk.icon_to_install, dotdesk.icon)
+
+
 def run_install_dotdesk(dotdesk):
-    pass
+    prog_name = dotdesk.name
+    print "Installing " + prog_name + ".desktop"
+    
+    if util.is_root_install():
+        install_dir = const.GLOBAL_DESK_DIR
+    else:
+        install_dir = const.LOCAL_DESK_DIR
+        
+    desktop = open(install_dir + prog_name + ".desktop", "w")
+    desktop.write(str(dotdesk))
+    desktop.close()
+
 
 # -----------------------------------------------------------------------------
 
@@ -109,7 +130,8 @@ def run_install_dotdesk(dotdesk):
 
 # -----------------------------------------------------------------------------
 
-#_wrk_dir = os.getcwd()
+
+# Main ------------------------------------------------------------------------
 
 _args = util.get_args()
 
@@ -121,3 +143,5 @@ if _args.i:
 #    print "generate"
 else:
     print "Try 'setup.py --help'"
+
+# -----------------------------------------------------------------------------
