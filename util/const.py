@@ -14,13 +14,17 @@ ICON_THEME = "/usr/share/icons/hicolor/"
 
 
 # Icon install directories.
-GLOBAL_ICON_DIR = ICON_THEME + "{size}/apps/"
+GLOBAL_ICON_DIR = ICON_THEME + "{icon_size}/apps/"
 LOCAL_ICON_DIR = HOME + ".icons/"
 
 
 # .desktop install directories.
 GLOBAL_DESK_DIR = "/usr/share/applications/"
 LOCAL_DESK_DIR = HOME + ".local/share/applications/"
+
+
+# Icon types supported.
+ICON_TYPES = [".png", ".svg", ".ico"]
 
 
 # List of all available program categories.
@@ -37,11 +41,3 @@ CATEGORIES_LIST = ["AudioVideo",
                    "Settings",
                    "System",
                    "Utility"]
-
-
-DOTDESK_HEADER = ("\n" +
-                  "--|dotdesk|---------------------------------\n" +
-                  "\n" +
-                  "Ready to {action} {name}.desktop\n" +
-                  "\n" +
-                  "--------------------------------------------\n")

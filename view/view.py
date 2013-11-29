@@ -7,7 +7,11 @@ from util import util
 from util import const
 
 def prompt_string(prompt):
-    return raw_input("\n> " + prompt + ": ")
+    string = raw_input("\n> " + prompt + ": ")
+    if string is None:
+        return ""
+    else:
+        return string 
 
 
 def prompt_Y_n(prompt):
@@ -18,7 +22,7 @@ def prompt_Y_n(prompt):
         elif Y_n is "N" or Y_n is "n":
             return False
         else:
-            print "You need to enter Y or n"
+            print_string("\nYou need to enter Y or n")
 
 
 def prompt_path(prompt, error):
@@ -27,7 +31,7 @@ def prompt_path(prompt, error):
         if util.file_exists(path):
             return path
         else:
-            print error
+            print_string(error)
 
 
 def prompt_select(prompt, error, num_options):
@@ -36,7 +40,11 @@ def prompt_select(prompt, error, num_options):
         if select >= 0 and select < num_options:
             return select
         else:
-            print error
+            print_string(error)
+
+
+def print_string(string):
+    print string
 
 
 def print_list(list_to_print):
@@ -46,8 +54,4 @@ def print_list(list_to_print):
         else:
             select = "[" + str(i) + "] "
             
-        print select + str(list_to_print[i])
-
-
-def print_header(action, name):
-    print const.DOTDESK_HEADER.format(action=action, name=name)
+        print_string(select + str(list_to_print[i]))
