@@ -4,17 +4,16 @@
 
 '''
 
-from util import session
-
+import utils
 from control.install import install
 
 import sys
 
 # Get command line args before checking user privileges so the -h command can
 # be run by any user.
-args = session.get_args()
+args = utils.get_args()
 
-if session.is_NOT_root_user():
+if utils.is_NOT_root_user():
     print "You do not have the correct privileges. Please run as 'root' user."
     sys.exit()
 

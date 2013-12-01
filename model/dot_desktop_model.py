@@ -1,9 +1,5 @@
 class DotDesktopModel:
-
-    '''
-    This class models the .desktop file to be installed.
-    '''
-
+    ''' This class models the .desktop file to be installed. '''
     def __init__(self, name=""):
         self.name = name
         self.tooltip = ""
