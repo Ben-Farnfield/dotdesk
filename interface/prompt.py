@@ -25,13 +25,11 @@ def for_path(prompt):
         path = for_string(prompt)
         if utils.file_exists(path):
             return path
-        else:
-            print "\nFile not found."
+        print "\nFile not found."
 
 def to_select(prompt, num_options):
     while True:
         select = int(for_string(prompt))
         if select >= 0 and select < num_options:
             return select
-        else:
-            print "/nMust select an option between 0 and " + num_options-1
+        print "/nMust select an option between 0 and " + num_options-1
