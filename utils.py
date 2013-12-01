@@ -37,7 +37,11 @@ def file_type(path):
     return path[start:end]
 
 def valid_file_type(file_type):
-    for valid_type in 
+    for valid_type in const.ICON_TYPES:
+        if file_type is valid_type:
+            return True
+
+    return False
 
 def copy_file(loc, dst):
     ''' Copies file from location to destination '''
