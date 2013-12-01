@@ -5,4 +5,4 @@
 
 def option_list(list_to_print):
     for i in range(len(list_to_print)):
-        print "{0:>4} {1:>15}".format("[" + str(i) + "]", list_to_print[i])
+        print "{0:>4} {1:>11}".format("[" + str(i) + "]", list_to_print[i])
