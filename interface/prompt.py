@@ -12,15 +12,14 @@ def for_string(prompt):
     else:
         return string
 
-def for_yes_no(prompt, error):
+def for_yes_no(prompt):
     while True:
         yes_no = for_string(prompt + " y/n")
-        if yes_no is "Y" or yes_no is "y":
+        if yes_no in ("y", "Y", "yes", "Yes"):
             return True
-        elif yes_no is "N" or yes_no is "n":
+        if yes_no in ("n", "N", "no", "No"):
             return False
-        else:
-            print "\n" + error
+        print "\nMust enter y or n"
 
 def for_path(prompt, error):
     while True:
