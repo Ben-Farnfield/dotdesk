@@ -3,7 +3,7 @@
 
 '''
 
-from util import this
+import utils
 
 def for_string(prompt):
     string = raw_input("\n> " + prompt + ": ")
@@ -25,7 +25,7 @@ def for_yes_no(prompt, error):
 def for_path(prompt, error):
     while True:
         path = for_string(prompt)
-        if this.file_exists(path):
+        if utils.file_exists(path):
             return path
         else:
             print "\n" + error

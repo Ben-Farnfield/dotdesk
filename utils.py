@@ -3,6 +3,8 @@
 
 '''
 
+import const
+
 import argparse
 import getpass
 import os
@@ -21,13 +23,23 @@ def is_NOT_root_user():
 
     # ------------------------------ file ----------------------------- #
 
-def exists(path):
+def file_exists(path):
     return os.path.isfile(path)
 
-def type(path): 
-    file_type 
+def file_type(path):
+    try:
+        start = path.rindex(".")
+        end = len(path)
+    except ValueError as e:
+        print "\nNo file type found!"
+        return None
+        
+    return path[start:end]
 
-def copy(loc, dst):
+def valid_file_type(file_type):
+    for valid_type in 
+
+def copy_file(loc, dst):
     ''' Copies file from location to destination '''
     # Need to deal with exceptions.
     pass
