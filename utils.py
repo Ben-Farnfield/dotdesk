@@ -29,11 +29,10 @@ def file_exists(path):
 def file_type(path):
     try:
         start = path.rindex(".")
+        return path[start:len(path)]
     except ValueError as e:
         print "\nNo file type found!"
-        return None
-        
-    return path[start:len(path)]
+        return ""
 
 def valid_file_type(file_type):
     for valid_type in const.ICON_TYPES:
