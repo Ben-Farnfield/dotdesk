@@ -3,16 +3,16 @@
 
 '''
 
-    # ------------------------------ path ------------------------------ #
+    # ------------------------------ paths ------------------------------ #
 
 DESK_INSTALL_DIR = "/usr/share/applications/"
 
 ICON_THEME = "/usr/share/icons/hicolor/"
 ICON_INSTALL_DIR = ICON_THEME + "{icon_size}/apps/"
 
-    # ------------------------------ list ------------------------------ #
+    # ------------------------------ lists ------------------------------ #
 
-CATEGORIES = ["AudioVideo",
+CATEGORIES = ("AudioVideo",
               "Audio",
               "Video",
               "Development",
@@ -24,11 +24,11 @@ CATEGORIES = ["AudioVideo",
               "Science",
               "Settings",
               "System",
-              "Utility"]
+              "Utility")
 
-ICON_SIZES = ["48x48",
+ICON_SIZES = ("48x48",
               "64x64",
-              "scalable"]
+              "scalable")
 
-ICON_TYPES = [".png",
-              ".svg"]
+ICON_TYPES = (".png",
+              ".svg")
