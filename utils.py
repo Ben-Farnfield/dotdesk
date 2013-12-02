@@ -49,3 +49,14 @@ def copy_file(src, dst):
     except (IOError, Error) as e:
         print str(e)
         return False
+
+def write_file(path, contents):
+    try:
+        doc = open(path, "w")
+        doc.write(contents)
+        return True
+    except IOError as e:
+        print str(e)
+        return False
+    finally:
+        doc.close()
