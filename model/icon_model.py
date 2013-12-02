@@ -14,8 +14,8 @@ class IconModel(object):
         self.icon_size = ""
 
     def __str__(self):
-        # put assert in here !
-        install_dir = INSTALL_DIR.format(icon_size=self.icon_size)
-        icon = self.icon_name + self.icon_type
-        
-        return install_dir + icon
+        if self.install_icon:
+            inst_dir = IconModel.INSTALL_DIR.format(icon_size=self.icon_size)
+            icon = self.icon_name + self.icon_type
+            return inst_dir + icon
+        return ""

@@ -37,9 +37,8 @@ def file_type(path):
 
 def valid_file_type(file_type):
     for valid_type in const.ICON_TYPES:
-        if file_type is valid_type:
+        if file_type == valid_type:
             return True
-
     return False
 
 def copy_file(src, dst):

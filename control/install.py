@@ -5,8 +5,8 @@
 
 import utils
 import const
-import interface.prompt
-import interface.output
+from interface import prompt
+from interface import output
 from model.dot_desktop_model import DotDesktopModel
 from model.icon_model import IconModel
 
@@ -24,10 +24,14 @@ def install(args):
 
     desktop, icon = run_install_cli(desktop, icon)
 
-    if icon.install_icon:
-        run_icon_install(icon)
+    # DEBUG
+    print desktop
+    print icon
 
-    run_desktop_install(desktop)
+    #~ if icon.install_icon:
+        #~ run_icon_install(icon)
+#~ 
+    #~ run_desktop_install(desktop)
 
 
 def run_install_cli(desktop, icon):
@@ -36,7 +40,7 @@ def run_install_cli(desktop, icon):
     desktop.exe = prompt.for_string("Enter execution command")
 
     output.option_list("Select a category", const.CATEGORIES)
-    selection = prompt.for_selection("Make selection", const.CATEGORIES_LEN)
+    selection = prompt.for_selection("Make a selection", const.CATEGORIES_LEN)
     desktop.category = const.CATEGORIES[selection]
 
     icon.install_icon = prompt.for_yes_no("Install an icon?")
@@ -44,10 +48,12 @@ def run_install_cli(desktop, icon):
         icon.icon_to_install = prompt.for_path("Enter full path to icon")
         icon.icon_type = utils.file_type(icon.icon_to_install)
 
-        output.option_list("Select an icon size", const.ICON_SIZES)
-        selection = prompt.for_selection("Make selection",
+        output.option_list("Select icon size", const.ICON_SIZES)
+        selection = prompt.for_selection("Make a selection",
                                          const.ICON_SIZES_LEN)
         icon.icon_size = const.ICON_SIZES[selection]
+
+        desktop.icon = str(icon)
 
     return (desktop, icon)
 

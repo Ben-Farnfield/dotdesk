@@ -7,8 +7,8 @@ import utils
 
 def for_string(prompt):
     string = raw_input("\n> " + prompt + ": ")
-    if string is None:
-        return ""
+    #~ if string is None:
+        #~ return ""
     return string
 
 def for_yes_no(prompt):
@@ -33,8 +33,13 @@ def for_path(prompt):
         return path
 
 def for_selection(prompt, num_options):
+    error = "\nMust select an option between 0 and " + str(num_options-1)
     while True:
-        select = int(for_string(prompt))
-        if select >= 0 and select < num_options:
-            return select
-        print "/nMust select an option between 0 and " + str(num_options-1)
+        selection = for_string(prompt)
+        if selection == "":
+            print error
+            continue
+        if int(selection) >= 0 and int(selection) < num_options:
+            return int(selection)
+        else:
+            print error
