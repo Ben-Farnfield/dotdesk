@@ -61,4 +61,9 @@ def run_icon_install(icon):
 
 
 def run_desktop_install(desktop):
-    if utils.write_file()
+    install_path = DotDesktopModel.INSTALL_DIR + desktop.name + ".desktop"
+    if utils.write_file(install_path, str(desktop)):
+        print ".desktop installed!"
+    else:
+        print "Issue installing .desktop!"
+        sys.exit()
