@@ -1,7 +1,9 @@
-from const import ICON_INSTALL_DIR
-
 class IconModel(object):
     ''' This class models the icon to be installed. '''
+
+    ICON_THEME = "/usr/share/icons/hicolor/"
+    INSTALL_DIR = ICON_THEME + "{icon_size}/apps/"
+
     def __init__(self, icon_name=""):
         self.install_icon = False
 
@@ -13,7 +15,7 @@ class IconModel(object):
 
     def __str__(self):
         # put assert in here !
-        install_dir = ICON_INSTALL_DIR.format(icon_size=self.icon_size)
+        install_dir = INSTALL_DIR.format(icon_size=self.icon_size)
         icon = self.icon_name + self.icon_type
         
         return install_dir + icon

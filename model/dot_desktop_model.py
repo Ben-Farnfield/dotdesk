@@ -1,5 +1,8 @@
-class DotDesktopModel:
+class DotDesktopModel(object):
     ''' This class models the .desktop file to be installed. '''
+
+    INSTALL_DIR = "/usr/share/applications/"
+
     def __init__(self, name=""):
         self.name = name
         self.tooltip = ""
