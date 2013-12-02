@@ -23,8 +23,7 @@ def for_path(prompt):
         if not utils.file_exists(path):
             print "\nFile not found."
             continue
-        icon_type = utils.file_type(path)
-        if not utils.valid_file_type(icon_type):
+        if not utils.valid_file_type(path):
             print "\nNot a valid file type."
             continue
         return path

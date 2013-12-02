@@ -13,7 +13,6 @@ import os
     # ---------------------------- session ---------------------------- #
 
 def get_args():
-    ''' Returns the parsed arguments passed by the user '''
     parser = argparse.ArgumentParser(prog="dotdesk")
     parser.add_argument("-i", help="Install .desktop and icon")
     parser.add_argument("-r", help="Remove .desktop and icon")
@@ -35,9 +34,10 @@ def file_type(path):
         print "\nNo file type found!"
         return ""
 
-def valid_file_type(file_type):
+def valid_file_type(path):
+    f_type = file_type(path)
     for valid_type in const.ICON_TYPES:
-        if file_type == valid_type:
+        if f_type == valid_type:
             return True
     return False
 
