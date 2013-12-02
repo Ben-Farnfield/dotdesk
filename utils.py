@@ -43,9 +43,9 @@ def valid_file_type(path):
 
 def copy_file(src, dst):
     try:
-        shutil.copy_file(src, dst)
+        shutil.copyfile(src, dst)
         return True
-    except (IOError, Error) as e:
+    except IOError as e:
         print str(e)
         return False
 

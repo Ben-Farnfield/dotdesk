@@ -24,14 +24,10 @@ def install(args):
 
     desktop, icon = run_install_cli(desktop, icon)
 
-    # DEBUG
-    print desktop
-    print icon
+    run_desktop_install(desktop)
 
-    #~ if icon.install_icon:
-        #~ run_icon_install(icon)
-#~ 
-    #~ run_desktop_install(desktop)
+    if icon.install_icon:
+        run_icon_install(icon)
 
 
 def run_install_cli(desktop, icon):
@@ -58,18 +54,18 @@ def run_install_cli(desktop, icon):
     return (desktop, icon)
 
 
-def run_icon_install(icon):
-    if utils.copy_file(icon.icon_to_install, str(icon)):
-        print "Icon installed!"
-    else:
-        print "Issue installing icon!"
-        sys.exit()
-
-
 def run_desktop_install(desktop):
     install_path = DotDesktopModel.INSTALL_DIR + desktop.name + ".desktop"
     if utils.write_file(install_path, str(desktop)):
         print ".desktop installed!"
     else:
         print "Issue installing .desktop!"
+        sys.exit()
+
+
+def run_icon_install(icon):
+    if utils.copy_file(icon.icon_to_install, str(icon)):
+        print "Icon installed!"
+    else:
+        print "Issue installing icon!"
         sys.exit()
