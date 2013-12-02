@@ -46,5 +46,6 @@ def copy_file(src, dst):
     try:
         shutil.copy_file(src, dst)
         return True
-    except (IOError, Error):
+    except (IOError, Error) as e:
+        print str(e)
         return False
