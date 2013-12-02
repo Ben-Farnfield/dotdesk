@@ -48,8 +48,11 @@ def run_install_cli(desktop):
         
     return desktop
 
-def run_icon_install():
-    pass
+def run_icon_install(desktop):
+    icon_name = program + icon_type
+    install_dir = const.ICON_INSTALL_DIR.format(icon_size=icon_size)
+    
+    installed = utils.copy_file(icon_to_install, install_dir + icon_name)
 
 def run_desktop_install():
     pass
