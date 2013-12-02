@@ -37,4 +37,4 @@ def for_selection(prompt, num_options):
         select = int(for_string(prompt))
         if select >= 0 and select < num_options:
             return select
-        print "/nMust select an option between 0 and " + num_options-1
+        print "/nMust select an option between 0 and " + str(num_options-1)
