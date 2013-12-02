@@ -6,10 +6,7 @@
 import utils
 
 def for_string(prompt):
-    string = raw_input("\n> " + prompt + ": ")
-    #~ if string is None:
-        #~ return ""
-    return string
+    return raw_input("\n> " + prompt + ": ")
 
 def for_yes_no(prompt):
     while True:
