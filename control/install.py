@@ -12,6 +12,10 @@ from model.dot_desktop_model import DotDesktopModel
 import sys
 
 def install(args):
+    icon_to_install = None
+    icon_type = None
+    icon_size = None
+
     program = args.i
     
     if utils.file_exists(const.DESK_INSTALL_DIR + program + ".desktop"):
@@ -19,7 +23,11 @@ def install(args):
         sys.exit()
 
     desktop = DotDesktopModel(program)
+    desktop = run_install_cli(desktop)
+    run_icon_install(desktop)
+    run_desktop_install(desktop)
 
+def run_install_cli(desktop):
     desktop.terminal = prompt.for_yes_no("Terminal app?")
     desktop.tooltip = prompt.for_string("Enter tooltip")
     desktop.exe = prompt.for_string("Enter execution command")
@@ -37,14 +45,11 @@ def install(args):
         selection = prompt.for_selection("Make selection",
                                          const.ICON_SIZES_LEN)
         icon_size = const.ICON_SIZES[selection]
+        
+    return desktop
 
-# cli
-# check if desktop installed DONE
-# > ask if terminal app? DONE
-# > ask for tooltip DONE
-# > ask for exec cmnd DONE
-# > ask for category DONE
-# > ask if install icon? DONE
-# > enter full path to icon. DONE
-# extract icon format DONE
-# > ask icon size. DONE
+def run_icon_install():
+    pass
+
+def run_desktop_install():
+    pass
