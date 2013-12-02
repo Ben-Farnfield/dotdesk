@@ -23,11 +23,16 @@ def for_yes_no(prompt):
 def for_path(prompt):
     while True:
         path = for_string(prompt)
-        if utils.file_exists(path):
-            return path
-        print "\nFile not found."
+        if not utils.file_exists(path):
+            print "\nFile not found."
+            continue
+        icon_type = utils.file_type(path)
+        if not utils.valid_file_type(icon_type):
+            print "\nNot a valid file type."
+            continue
+        return path
 
-def to_select(prompt, num_options):
+def for_selection(prompt, num_options):
     while True:
         select = int(for_string(prompt))
         if select >= 0 and select < num_options:
