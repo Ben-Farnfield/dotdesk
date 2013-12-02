@@ -18,9 +18,8 @@ if utils.is_NOT_root_user():
     sys.exit()
 
 if args.i:
-    print "install"
     install(args)
 elif args.r:
-    print "remove"
+    pass
 else:
     print "Try 'dotdesk -h'"
