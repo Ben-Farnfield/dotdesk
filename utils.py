@@ -7,6 +7,7 @@ import const
 
 import argparse
 import getpass
+import shutil
 import os
 
     # ---------------------------- session ---------------------------- #
@@ -41,7 +42,9 @@ def valid_file_type(file_type):
 
     return False
 
-def copy_file(loc, dst):
-    ''' Copies file from location to destination '''
-    # Need to deal with exceptions.
-    pass
+def copy_file(src, dst):
+    try:
+        shutil.copy_file(src, dst)
+        return True
+    except (IOError, Error):
+        return False
