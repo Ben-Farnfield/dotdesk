@@ -15,15 +15,18 @@ import sys
 def install(args):
     program = args.i
 
-    if utils.file_exists(const.DESK_INSTALL_DIR + program + ".desktop"):
+    if utils.file_exists(DotDesktopModel.INSTALL_DIR + program + ".desktop"):
         print program + ".desktop is already installed."
         sys.exit()
 
     desktop = DotDesktopModel(program)
     icon = IconModel(program)
-    
+
     desktop, icon = run_install_cli(desktop, icon)
-    run_icon_install(icon)
+
+    if icon.install_icon:
+        run_icon_install(icon)
+
     run_desktop_install(desktop)
 
 
@@ -36,8 +39,8 @@ def run_install_cli(desktop, icon):
     selection = prompt.for_selection("Make selection", const.CATEGORIES_LEN)
     desktop.category = const.CATEGORIES[selection]
 
-    install_icon = prompt.for_yes_no("Install an icon?")
-    if install_icon:
+    icon.install_icon = prompt.for_yes_no("Install an icon?")
+    if icon.install_icon:
         icon.icon_to_install = prompt.for_path("Enter full path to icon")
         icon.icon_type = utils.file_type(icon.icon_to_install)
 
@@ -45,13 +48,17 @@ def run_install_cli(desktop, icon):
         selection = prompt.for_selection("Make selection",
                                          const.ICON_SIZES_LEN)
         icon.icon_size = const.ICON_SIZES[selection]
-        
+
     return (desktop, icon)
 
 
 def run_icon_install(icon):
-    installed = utils.copy_file(icon_to_install, install_dir + icon_name)
+    if utils.copy_file(icon.icon_to_install, str(icon)):
+        print "Icon installed!"
+    else:
+        print "Issue installing icon!"
+        sys.exit()
 
 
-def run_desktop_install():
-    pass
+def run_desktop_install(desktop):
+    if utils.write_file()
