@@ -6,6 +6,7 @@
 
 import utils
 from control.install import install
+from control.remove import remove
 
 import sys
 
@@ -20,6 +21,6 @@ if utils.is_NOT_root_user():
 if args.i:
     install(args)
 elif args.r:
-    pass
+    remove(args)
 else:
     print "Try 'dotdesk -h'"
