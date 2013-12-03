@@ -31,11 +31,11 @@ def for_path(prompt):
 def for_selection(prompt, num_options):
     error = "\nMust select an option between 0 and " + str(num_options-1)
     while True:
-        selection = for_string(prompt)
-        if selection == "":
-            print error
-            continue
-        if int(selection) >= 0 and int(selection) < num_options:
-            return int(selection)
-        else:
+        try:
+            selection = int(for_string(prompt))
+            if selection >= 0 and selection < num_options:
+                return selection
+            else:
+                print error
+        except ValueError:
             print error
