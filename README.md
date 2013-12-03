@@ -18,16 +18,16 @@ sudo ./install.py -r
 
 ## dotdesk usage
 
-#### install .desktop
+#### Install .desktop
 Open a terminal and run:
 ```
-dotdesk -i [program name]
+sudo dotdesk -i [program name]
 ```
 
-#### remove .desktop
-*note: you should only remove .desktop files which were installed using dotdesk*
+#### Remove .desktop
+*note: you should only remove .desktop files which have been installed using dotdesk*
 ```
-dotdesk -r [program name]
+sudo dotdesk -r [program name]
 ```
 
 ## Interface
