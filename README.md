@@ -16,7 +16,7 @@ Open a terminal within you dotdesk install directory and run:
 sudo ./install.py -r
 ```
 
-### dotdesk usage
+## dotdesk usage
 
 #### install .desktop
 Open a terminal and run:
