@@ -30,7 +30,7 @@ sudo dotdesk -i [program name]
 sudo dotdesk -r [program name]
 ```
 
-## Interface
+#### Interface
 
 dotdesk provides a simple terminal interface for inputting relevant data.
 
