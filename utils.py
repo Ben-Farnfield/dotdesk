@@ -66,3 +66,14 @@ def write_file(path, contents, msg=None, error=None):
         sys.exit()
     finally:
         doc.close()
+
+def remove_file(path, msg=None, error=None):
+    try:
+        os.remove(path)
+        if msg != None:
+            print msg
+    except OSError as e:
+        print str(e)
+        if error != None:
+            print error
+        sys.exit()
