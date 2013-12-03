@@ -16,7 +16,7 @@ Open a terminal within you dotdesk install directory and run:
 sudo ./install.py -r
 ```
 
-### Usage
+### dotdesk usage
 
 #### install
 Open a terminal and run:
@@ -25,7 +25,7 @@ dotdesk -i [program name]
 ```
 
 #### remove
-*note: you should only remove .desktop files installed using dotdesk*
+*note: you should only remove .desktop files which were installed using dotdesk*
 ```
 dotdesk -r [program name]
 ```
@@ -89,5 +89,5 @@ please see LICENSE.md for details.
 
 ### Me
 
-If you have further questions, or wish to contact me, you can reach me at:
+If you have further questions you can reach me at:
 ben.farnfield@gmail.com
