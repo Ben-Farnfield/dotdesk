@@ -2,26 +2,35 @@
 
 dotdesk is a simple Python utility written to create and install .desktop files along with their companion .png or .svg icons.
 
-## Install
+### Install
+Open a terminal within the directory you wish to install dotdesk and run:
+```
+git clone https://github.com/Ben-Farnfield/dotdesk.git
+cd dotdesk
+sudo ./install.py -i
+```
 
-`git clone https://github.com/Ben-Farnfield/dotdesk.git`
-`cd dotdesk`
-`sudo ./install.py -i`
+### Remove
+Open a terminal within you dotdesk install directory and run:
+```
+sudo ./install.py -r
+```
 
-## Remove
+### Usage
 
-`sudo ./install.py -r`
+#### install
+Open a terminal and run:
+```
+dotdesk -i [program name]
+```
 
-## Usage
+#### remove
+*note: you should only remove .desktop files installed using dotdesk*
+```
+dotdesk -r [program name]
+```
 
-### install
-`dotdesk -i [program name]`
-
-### remove
-*NOTE: you should only remove .desktop files installed using dotdesk*
-`dotdesk -r [program name]`
-
-## Interface
+### Interface
 
 dotdesk provides a simple terminal interface for inputting relevant data.
 
@@ -74,11 +83,11 @@ Bye!
 
 ```
 
-## License
+### License
 
 please see LICENSE.md for details.
 
-## Me
+### Me
 
 If you have further questions, or wish to contact me, you can reach me at:
-`ben.farnfield@gmail.com`
+ben.farnfield@gmail.com
