@@ -18,13 +18,13 @@ sudo ./install.py -r
 
 ### dotdesk usage
 
-#### install
+#### install .desktop
 Open a terminal and run:
 ```
 dotdesk -i [program name]
 ```
 
-#### remove
+#### remove .desktop
 *note: you should only remove .desktop files which were installed using dotdesk*
 ```
 dotdesk -r [program name]
