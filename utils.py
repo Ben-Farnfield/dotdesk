@@ -9,6 +9,7 @@ import argparse
 import getpass
 import shutil
 import os
+import sys
 
     # ---------------------------- session ---------------------------- #
 
@@ -41,21 +42,27 @@ def valid_file_type(path):
             return True
     return False
 
-def copy_file(src, dst):
+def copy_file(src, dst, msg=None, error=None):
     try:
         shutil.copyfile(src, dst)
-        return True
+        if msg != None:
+            print msg
     except IOError as e:
         print str(e)
-        return False
+        if error != None:
+            print error
+        sys.exit()
 
-def write_file(path, contents):
+def write_file(path, contents, msg=None, error=None):
     try:
         doc = open(path, "w")
         doc.write(contents)
-        return True
+        if msg != None:
+            print msg
     except IOError as e:
         print str(e)
-        return False
+        if error != None:
+            print error
+        sys.exit()
     finally:
         doc.close()
