@@ -5,8 +5,8 @@
 '''
 
 import utils
-from control.install import install
-from control.remove import remove
+from process.install import install
+from process.remove import remove
 
 import sys
 
