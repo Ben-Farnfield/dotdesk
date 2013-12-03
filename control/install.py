@@ -22,15 +22,15 @@ def install(args):
     desktop = DotDesktopModel(program)
     icon = IconModel(program)
 
-    desktop, icon = run_install_cli(desktop, icon)
+    desktop, icon = _run_install_cli(desktop, icon)
 
-    run_desktop_install(desktop)
+    _run_desktop_install(desktop)
 
     if icon.install_icon:
-        run_icon_install(icon)
+        _run_icon_install(icon)
 
 
-def run_install_cli(desktop, icon):
+def _run_install_cli(desktop, icon):
     desktop.terminal = prompt.for_yes_no("Terminal app?")
     desktop.tooltip = prompt.for_string("Enter tooltip")
     desktop.exe = prompt.for_string("Enter execution command")
@@ -54,7 +54,7 @@ def run_install_cli(desktop, icon):
     return (desktop, icon)
 
 
-def run_desktop_install(desktop):
+def _run_desktop_install(desktop):
     install_path = DotDesktopModel.INSTALL_DIR + desktop.name + ".desktop"
     if utils.write_file(install_path, str(desktop)):
         print ".desktop installed!"
@@ -63,7 +63,7 @@ def run_desktop_install(desktop):
         sys.exit()
 
 
-def run_icon_install(icon):
+def _run_icon_install(icon):
     if utils.copy_file(icon.icon_to_install, str(icon)):
         print "Icon installed!"
     else:
