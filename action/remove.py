@@ -1,6 +1,5 @@
 
-'''
-
+''' This module controls the removal process for dotdesk.
 '''
 
 from model.dot_desktop_model import DotDesktopModel

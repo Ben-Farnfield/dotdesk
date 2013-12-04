@@ -1,6 +1,6 @@
 
-'''
-
+''' This module is a place holder for a config file. If I find the time I plan
+    to replace this.
 '''
 
 CATEGORIES = ("AudioVideo",

@@ -1,14 +1,13 @@
 class IconModel(object):
-    ''' This class models the icon to be installed. '''
+    ''' This class models any icon to be installed.
+    '''
 
     ICON_THEME = "/usr/share/icons/hicolor/"
     INSTALL_DIR = ICON_THEME + "{icon_size}/apps/"
 
     def __init__(self, icon_name=""):
         self.install_icon = False
-
         self.icon_to_install = ""
-
         self.icon_name = icon_name
         self.icon_type = ""
         self.icon_size = ""

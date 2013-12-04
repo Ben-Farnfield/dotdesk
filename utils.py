@@ -1,6 +1,5 @@
 
-'''
-This class provides all the general utilities required by dotdesk.
+''' This module provides all the general functions required by dotdesk.
 '''
 
 import const
@@ -14,8 +13,9 @@ import sys
     # ---------------------------- session ---------------------------- #
 
 def get_args():
-    ''' Returns a dictionary containing the option set by the user as well
-        as the program name. You can access these using "flag" and "name".
+    ''' Returns a dictionary containing the flag as well as the program name
+        passed by the user. You can access these using the keys "flag" and
+        "name".
     '''
     args = sys.argv
     len_args = len(args)
@@ -35,7 +35,7 @@ def is_NOT_root_user():
     return getpass.getuser() != "root"
 
 def args_to_name(args_list):
-    ''' Concatenates the provided arg list into a space separated name. '''
+    ''' Concatenates the provided arg list into a space separated string. '''
     name = "".join(arg + " " for arg in args_list)
     return name.rstrip()
 
@@ -59,38 +59,32 @@ def valid_file_type(path):
             return True
     return False
 
-def copy_file(src, dst, msg=None, error=None):
+def copy_file(src, dst, msg, error):
     try:
         shutil.copyfile(src, dst)
-        if msg is not None:
-            print msg
+        print msg
     except IOError as e:
         print str(e)
-        if error is not None:
-            print error
+        print error
         sys.exit()
 
-def write_file(path, contents, msg=None, error=None):
+def write_file(path, contents, msg, error):
     try:
         doc = open(path, "w")
         doc.write(contents)
-        if msg is not None:
-            print msg
+        print msg
     except IOError as e:
         print str(e)
-        if error is not None:
-            print error
+        print error
         sys.exit()
     finally:
         doc.close()
 
-def remove_file(path, msg=None, error=None):
+def remove_file(path, msg, error):
     try:
         os.remove(path)
-        if msg is not None:
-            print msg
+        print msg
     except OSError as e:
         print str(e)
-        if error is not None:
-            print error
+        print error
         sys.exit()

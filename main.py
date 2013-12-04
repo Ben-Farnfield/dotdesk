@@ -1,11 +1,12 @@
 #! /usr/bin/python
 
-'''
-dotdesk is a simple Python utility written to create and install .desktop
-files along with their companion icons.
+''' dotdesk is a simple Python utility written to create and install .desktop
+    files along with their companion icons.
 
-Author: Ben Farnfield
-Contact: ben.farnfield@gmail.com
+    This module provides argument parsing for dotdesk.
+
+    Author: Ben Farnfield
+    Contact: ben.farnfield@gmail.com
 '''
 
 import utils

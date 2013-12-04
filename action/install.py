@@ -1,6 +1,5 @@
 
-'''
-
+''' This module controls the install process for dotdesk.
 '''
 
 import utils

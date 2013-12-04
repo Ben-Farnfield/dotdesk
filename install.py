@@ -1,10 +1,9 @@
 #! /usr/bin/python
 
-'''
-This script is used to install and remove dotdesk.
+''' This script is used to install and remove dotdesk.
 
-Author: Ben Farnfield
-Contact: ben.farnfield@gmail.com
+    Author: Ben Farnfield
+    Contact: ben.farnfield@gmail.com
 '''
 
 import utils

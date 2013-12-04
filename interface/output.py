@@ -1,6 +1,6 @@
 
-'''
-
+''' This module provides all the functions used to output information to the
+    user (beyond a simple print).
 '''
 
 def option_list(prompt, list_to_print):

@@ -1,6 +1,5 @@
 
-'''
-
+''' This module contains all functions used to request input from the user.
 '''
 
 import utils

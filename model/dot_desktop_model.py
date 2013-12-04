@@ -1,5 +1,6 @@
 class DotDesktopModel(object):
-    ''' This class models the .desktop file to be installed. '''
+    ''' This class models the .desktop file to be installed.
+    '''
 
     INSTALL_DIR = "/usr/share/applications/"
 
