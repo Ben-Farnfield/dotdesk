@@ -25,7 +25,7 @@ def install():
     cwd = os.getcwd()
     script_contents = ("#! /bin/bash\n" +
                        " " +
-                       cwd + "/main.py $1 $2")
+                       cwd + "/main.py \"$@\"")
 
     utils.write_file(_script, script_contents,
                      "\ndotdesk installed!\n",
