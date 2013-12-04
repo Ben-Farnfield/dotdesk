@@ -12,7 +12,7 @@ import const
 import sys
 
 def remove(args):
-    program = args.r
+    program = args["name"]
 
     if not utils.file_exists(DotDesktopModel.INSTALL_DIR + program + ".desktop"):
         print program + ".desktop is not installed."

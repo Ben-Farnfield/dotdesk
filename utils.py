@@ -14,13 +14,26 @@ import sys
     # ---------------------------- session ---------------------------- #
 
 def get_args():
-    parser = argparse.ArgumentParser(prog="dotdesk")
-    parser.add_argument("-i", help="Install .desktop and icon")
-    parser.add_argument("-r", help="Remove .desktop and icon")
-    return parser.parse_args()
+    args = sys.argv
+    len_args = len(args)
+    
+    if len_args == 0:
+        print "Try: 'dotdesk -h' for more info."
+        sys.exit()
+    if len_args > 1:
+        flag = args[1]
+        name = ""
+    if len_args > 2:
+        name = args_to_name(args[2:])
+
+    return {"flag":flag, "name":name}
 
 def is_NOT_root_user():
     return getpass.getuser() != "root"
+
+def args_to_name(args_list):
+    name = "".join(arg + " " for arg in args_list)
+    return name.rstrip()
 
     # ------------------------------ file ----------------------------- #
 

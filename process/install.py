@@ -13,7 +13,7 @@ from model.icon_model import IconModel
 import sys
 
 def install(args):
-    program = args.i
+    program = args["name"]
 
     if utils.file_exists(DotDesktopModel.INSTALL_DIR + program + ".desktop"):
         print program + ".desktop is already installed."

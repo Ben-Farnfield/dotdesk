@@ -10,21 +10,36 @@ from process.remove import remove
 
 import sys
 
+HELP_INFO = ("\n" +
+             "Usage: dotdesk [OPTION] [PROGRAM NAME]\n" +
+             "\n" +
+             "dotdesk is a simple utility written to create and install " +
+             ".desktop files along with their companion icons.\n" +
+             "\n" +
+             "Arguments:\n" +
+             "{:>5}{:>10}        {:<}\n".format("-i,", "--install",
+                                                "install a .desktop file.") + 
+             "{:>5}{:>10}        {:<}\n".format("-r,", "--remove",
+                                                "remove a .desktop file."))
+
 def main():
-    # Get command line args before checking user privileges so the -h command can
-    # be run by any user.
-    args = utils.get_args()
 
     if utils.is_NOT_root_user():
-        print "You do not have the correct privileges. Please run as 'root' user."
+        print ("You don't have the correct privileges to run dotdesk. " +
+               "Please run as 'root' user.")
         sys.exit()
 
-    if args.i:
+    args = utils.get_args()
+    
+    if args["flag"] in ("-i", "--install"):
         install(args)
-    elif args.r:
+    elif args["flag"] in ("-r", "--remove"):
         remove(args)
+    elif args["flag"] in ("-h", "--help"):
+        print HELP_INFO
     else:
-        print "Try 'dotdesk -h'"
+        print "Try: 'dotdesk -h' for more info."
+        sys.exit()
 
 try:
     main()
