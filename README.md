@@ -1,4 +1,4 @@
-# dotdesk
+# dotdesk v1.0
 
 dotdesk is a simple Python utility written to create and install .desktop files along with their companion .png or .svg icons.
 
