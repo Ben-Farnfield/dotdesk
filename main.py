@@ -10,8 +10,8 @@
 '''
 
 import utils
-from process.install import install
-from process.remove import remove
+from action.install import install
+from action.remove import remove
 
 import sys
 
