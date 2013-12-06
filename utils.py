@@ -1,6 +1,14 @@
 
-''' This module provides all the general functions required by dotdesk.
-'''
+"""
+This module provides all the general functions required by dotdesk.
+
+get_args()          -- return command line args
+is_NOT_root_user()  -- return True if not root user
+file_exists()       -- return True if file exists
+file_type()         -- return file extension e.g. '.png'
+valid_file_type()   -- return True if file type supported by dotdesk
+proc_file()         -- copy, write and remove files
+"""
 
 import const
 
@@ -13,10 +21,13 @@ import sys
     # ---------------------------- session ---------------------------- #
 
 def get_args():
-    ''' Returns a dictionary containing the flag as well as the program name
-        passed by the user. You can access these using the keys "flag" and
-        "name".
-    '''
+    """
+    Returns any command line arguments passed by the user.
+    
+    This function returns a dictionary containing the flag and program name
+    passed by the user. You can access the flag using the 'flag' key and
+    program name using the 'name' key.
+    """
     args = sys.argv
     len_args = len(args)
     
@@ -27,24 +38,27 @@ def get_args():
         flag = args[1]
         name = ""
     if len_args > 2:
-        name = args_to_name(args[2:])
+        name = _args_to_name(args[2:])
 
     return {"flag":flag, "name":name}
 
-def is_NOT_root_user():
-    return getpass.getuser() != "root"
-
-def args_to_name(args_list):
-    ''' Concatenates the provided arg list into a space separated string. '''
+def _args_to_name(args_list):
+    """ Return a space separated string. """
     name = "".join(arg + " " for arg in args_list)
     return name.rstrip()
+
+def is_NOT_root_user():
+    """ Return True if user is not root user. """
+    return getpass.getuser() != "root"
 
     # ------------------------------ file ----------------------------- #
 
 def file_exists(path):
+    """ Return True if this file exists. """
     return os.path.isfile(path)
 
 def file_type(path):
+    """ Return this files extension. """
     try:
         start = path.rindex(".")
         return path[start:len(path)]
@@ -53,6 +67,7 @@ def file_type(path):
         return ""
 
 def valid_file_type(path):
+    """ Return True if this file type is supported by dotdesk. """
     f_type = file_type(path)
     for valid_type in const.ICON_TYPES:
         if f_type == valid_type:
@@ -90,8 +105,7 @@ def remove_file(path, msg, error):
         sys.exit()
 
 def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
-   
-    ''' 
+    """
     Write, copy and remove files.
 
     This function provides all the file processing functionality required by 
@@ -106,9 +120,8 @@ def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
     dest   -- used by copy; string representing destination path (default None)
     cont   -- used by write; string representing content to be written (default None)
     msg    -- string printed if the action is successfully completed (default no msg)
-    error  -- string printed if the action fails (default no error)
-    '''
-
+    error  -- string printed if the action fails (default no msg)
+    """
     try:
         if action in ("c", "copy"):
             shutil.copyfile(path, dest)
