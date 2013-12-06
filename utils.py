@@ -90,6 +90,7 @@ def remove_file(path, msg, error):
         sys.exit()
 
 def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
+   
     ''' 
     Write, copy and remove files.
 
@@ -107,6 +108,7 @@ def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
     msg    -- string printed if the action is successfully completed (default no msg)
     error  -- string printed if the action fails (default no error)
     '''
+
     try:
         if action in ("c", "copy"):
             shutil.copyfile(path, dest)
@@ -119,7 +121,8 @@ def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
             raise Exception("Invalid arg passed to action")
         if msg is not None:
             print msg
-    except:
+    except Exception as e:
         if error is not None:
+            print str(e)
             print error
         sys.exit()
