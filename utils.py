@@ -88,3 +88,40 @@ def remove_file(path, msg, error):
         print str(e)
         print error
         sys.exit()
+
+def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
+    ''' 
+    Write, copy and remove files.
+
+    This function provides all the file processing functionality required by 
+    dotdesk. 
+    If an error is raised within this function it will exit the 
+    program; a failure here means the script cannot complete its primary
+    functions of installation and removal.
+
+    Keyword arguments:
+    action -- string "w" for write, "c" for copy or "r" for remove
+    path   -- string representing the path to the file to be processed
+    dest   -- used by copy; string representing destination path (default None)
+    cont   -- used by write; string representing content to be written (default None)
+    msg    -- string printed if the action is successfully completed (default no msg)
+    error  -- string printed if the action fails (default no error)
+    '''
+    try:
+        if action in ("c", "copy"):
+            shutil.copyfile(path, dest)
+        elif action in ("w", "write"):
+            with open(path, "w") as doc:
+                doc.write(cont)
+        elif action in ("r", "remove"):
+            os.remove(path)
+        else:
+            print "Invalid arg passed to proc_file(action ... )"
+            sys.exit()
+        if msg is not None:
+            print msg
+    except (IOError, OSError) as e:
+        print str(e)
+        if error is not None:
+            print error
+        sys.exit()
