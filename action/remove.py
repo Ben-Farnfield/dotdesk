@@ -29,9 +29,10 @@ def remove(args):
     output.line()
 
 def _run_remove_desktop(program):
-    utils.proc_file("remove", DotDesktopModel.INSTALL_DIR+program+".desktop",
-                      program + ".desktop removed!",
-                      "!!Issue removing .desktop!!")
+    utils.proc_file("remove", 
+                    DotDesktopModel.INSTALL_DIR + program + ".desktop",
+                    msg=program + ".desktop removed!",
+                    error="!!Issue removing .desktop!!")
 
 def _run_remove_icon(program):
     for icon_size in const.ICON_SIZES:
@@ -40,6 +41,6 @@ def _run_remove_icon(program):
             tmp_path = tmp_dir + program + icon_type
             if utils.file_exists(tmp_path):
                 utils.proc_file("remove", tmp_path,
-                                  program + icon_type + " removed!",
-                                  "!!Issue removing icon!!")
+                                msg=program + icon_type + " removed!",
+                                error="!!Issue removing icon!!")
                 return
