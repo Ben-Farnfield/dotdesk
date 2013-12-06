@@ -116,12 +116,10 @@ def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
         elif action in ("r", "remove"):
             os.remove(path)
         else:
-            print "Invalid arg passed to proc_file(action ... )"
-            sys.exit()
+            raise Exception("Invalid arg passed to action")
         if msg is not None:
             print msg
-    except (IOError, OSError) as e:
-        print str(e)
+    except:
         if error is not None:
             print error
         sys.exit()
