@@ -14,6 +14,7 @@ import const
 import sys
 
 def remove(args):
+    """ Runs the full removal process after ensuring the .desktop exists. """
     program = args["name"]
 
     if not utils.file_exists(DotDesktopModel.INSTALL_DIR+program+".desktop"):
@@ -29,12 +30,19 @@ def remove(args):
     output.line()
 
 def _run_remove_desktop(program):
+    """ Removes the .desktop file from its install dir. """
     utils.proc_file("remove", 
                     DotDesktopModel.INSTALL_DIR + program + ".desktop",
                     msg=program + ".desktop removed!",
                     error="!!Issue removing .desktop!!")
 
 def _run_remove_icon(program):
+    """
+    Removes the icon from its install dir.
+
+    Iterates through all possible icon sizes and formats until it
+    finds a match. It then removes this file and returns.
+    """
     for icon_size in const.ICON_SIZES:
         tmp_dir = IconModel.INSTALL_DIR.format(icon_size=icon_size)
         for icon_type in const.ICON_TYPES:

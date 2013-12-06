@@ -15,6 +15,7 @@ from model.icon_model import IconModel
 import sys
 
 def install(args):
+    """ Runs full install process if the .desktop file doesn't exist. """
     program = args["name"]
 
     if utils.file_exists(DotDesktopModel.INSTALL_DIR + program + ".desktop"):
@@ -26,7 +27,7 @@ def install(args):
 
     desktop, icon = _run_install_cli(desktop, icon)
 
-    output.line()
+    output.line() # make things pretty
     
     _run_desktop_install(desktop)
 
@@ -38,6 +39,12 @@ def install(args):
 
 
 def _run_install_cli(desktop, icon):
+    """ 
+    Runs the full install interface.
+    
+    The user is asked for all the basic info a .desktop file requires. The
+    user is provided the option to install an icon or not.
+    """
     desktop.terminal = prompt.for_yes_no("Terminal app?")
     desktop.tooltip = prompt.for_string("Enter tooltip")
     desktop.exe = prompt.for_string("Enter execution command")
@@ -62,6 +69,7 @@ def _run_install_cli(desktop, icon):
 
 
 def _run_desktop_install(desktop):
+    """ Installs the .desktop file in its install dir. """
     install_path = DotDesktopModel.INSTALL_DIR + desktop.name + ".desktop"
     utils.proc_file("write", install_path, cont=str(desktop),
                      msg=desktop.name + ".desktop installed!",
@@ -69,6 +77,7 @@ def _run_desktop_install(desktop):
 
 
 def _run_icon_install(icon):
+    """ Installs the icon in its install dir. """
     utils.proc_file("copy", icon.icon_to_install, dest=str(icon),
                     msg=icon.icon_name + icon.icon_type + " installed!",
                     error="!!Issue installing icon!!")
