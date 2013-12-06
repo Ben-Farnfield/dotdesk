@@ -43,22 +43,22 @@ def get_args():
     return {"flag":flag, "name":name}
 
 def _args_to_name(args_list):
-    """ Return a space separated string. """
+    """ Returns the lists contents as a space separated string. """
     name = "".join(arg + " " for arg in args_list)
     return name.rstrip()
 
 def is_NOT_root_user():
-    """ Return True if user is not root user. """
+    """ Returns True if user is not root. """
     return getpass.getuser() != "root"
 
     # ------------------------------ file ----------------------------- #
 
 def file_exists(path):
-    """ Return True if this file exists. """
+    """ Returns True if this file exists. """
     return os.path.isfile(path)
 
 def file_type(path):
-    """ Return this files extension. """
+    """ Returns this files extension e.g. '.png' """
     try:
         start = path.rindex(".")
         return path[start:len(path)]
@@ -67,42 +67,12 @@ def file_type(path):
         return ""
 
 def valid_file_type(path):
-    """ Return True if this file type is supported by dotdesk. """
+    """ Returns True if this file type is supported by dotdesk. """
     f_type = file_type(path)
     for valid_type in const.ICON_TYPES:
         if f_type == valid_type:
             return True
     return False
-
-def copy_file(src, dst, msg, error):
-    try:
-        shutil.copyfile(src, dst)
-        print msg
-    except IOError as e:
-        print str(e)
-        print error
-        sys.exit()
-
-def write_file(path, contents, msg, error):
-    try:
-        doc = open(path, "w")
-        doc.write(contents)
-        print msg
-    except IOError as e:
-        print str(e)
-        print error
-        sys.exit()
-    finally:
-        doc.close()
-
-def remove_file(path, msg, error):
-    try:
-        os.remove(path)
-        print msg
-    except OSError as e:
-        print str(e)
-        print error
-        sys.exit()
 
 def proc_file(action, path, dest=None, cont=None, msg=None, error=None):
     """
