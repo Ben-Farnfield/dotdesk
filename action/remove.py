@@ -1,6 +1,9 @@
 
-''' This module controls the removal process for dotdesk.
-'''
+"""
+This module controls the removal process for dotdesk.
+
+remove()  -- runs the full removal process
+"""
 
 from model.dot_desktop_model import DotDesktopModel
 from model.icon_model import IconModel
@@ -13,7 +16,7 @@ import sys
 def remove(args):
     program = args["name"]
 
-    if not utils.file_exists(DotDesktopModel.INSTALL_DIR + program + ".desktop"):
+    if not utils.file_exists(DotDesktopModel.INSTALL_DIR+program+".desktop"):
         print program + ".desktop is not installed."
         sys.exit()
 
@@ -26,7 +29,7 @@ def remove(args):
     output.line()
 
 def _run_remove_desktop(program):
-    utils.remove_file(DotDesktopModel.INSTALL_DIR + program + ".desktop",
+    utils.proc_file("remove", DotDesktopModel.INSTALL_DIR+program+".desktop",
                       program + ".desktop removed!",
                       "!!Issue removing .desktop!!")
 
@@ -36,7 +39,7 @@ def _run_remove_icon(program):
         for icon_type in const.ICON_TYPES:
             tmp_path = tmp_dir + program + icon_type
             if utils.file_exists(tmp_path):
-                utils.remove_file(tmp_path,
+                utils.proc_file("remove", tmp_path,
                                   program + icon_type + " removed!",
                                   "!!Issue removing icon!!")
                 return

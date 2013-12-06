@@ -1,6 +1,9 @@
 
-''' This module controls the install process for dotdesk.
-'''
+"""
+This module controls the install process for dotdesk.
+
+install() -- runs the full install process
+"""
 
 import utils
 import const
@@ -60,12 +63,12 @@ def _run_install_cli(desktop, icon):
 
 def _run_desktop_install(desktop):
     install_path = DotDesktopModel.INSTALL_DIR + desktop.name + ".desktop"
-    utils.write_file(install_path, str(desktop),
+    utils.proc_file("write", install_path, cont=str(desktop),
                      desktop.name + ".desktop installed!",
                      "!!Issue installing .desktop!!")
 
 
 def _run_icon_install(icon):
-    utils.copy_file(icon.icon_to_install, str(icon),
+    utils.proc_file("copy", icon.icon_to_install, dest=str(icon),
                     icon.icon_name + icon.icon_type + " installed!",
                     "!!Issue installing icon!!")
