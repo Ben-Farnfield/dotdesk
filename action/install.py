@@ -70,14 +70,16 @@ def _run_install_cli(desktop, icon):
 
 def _run_desktop_install(desktop):
     """ Installs the .desktop file in its install dir. """
-    install_path = DotDesktopModel.INSTALL_DIR + desktop.name + ".desktop"
-    utils.proc_file("write", install_path, cont=str(desktop),
-                     msg=desktop.name + ".desktop installed!",
-                     error="!!Issue installing .desktop!!")
+    path = DotDesktopModel.INSTALL_DIR + desktop.name + ".desktop"
+    desktop_contents = str(desktop)
+    utils.proc_file("write", path, desktop_contents,
+                     desktop.name + ".desktop installed!",
+                     "!!Issue installing .desktop!!")
 
 
 def _run_icon_install(icon):
     """ Installs the icon in its install dir. """
-    utils.proc_file("copy", icon.icon_to_install, dest=str(icon),
-                    msg=icon.icon_name + icon.icon_type + " installed!",
-                    error="!!Issue installing icon!!")
+    install_path = str(icon)
+    utils.proc_file("copy", icon.icon_to_install, install_path,
+                    icon.icon_name + icon.icon_type + " installed!",
+                    "!!Issue installing icon!!")

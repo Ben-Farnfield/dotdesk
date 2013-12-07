@@ -1,13 +1,14 @@
 #! /usr/bin/python
 
-''' dotdesk is a simple Python utility written to create and install .desktop
-    files along with their companion icons.
+"""
+dotdesk is a simple Python utility written to create and install .desktop
+files along with their companion icons.
 
-    This module provides argument parsing for dotdesk.
+This module provides argument parsing and the main entry point for dotdesk.
 
-    Author: Ben Farnfield
-    Contact: ben.farnfield@gmail.com
-'''
+Author: Ben Farnfield
+Contact: ben.farnfield@gmail.com
+"""
 
 import utils
 from action.install import install
@@ -15,23 +16,23 @@ from action.remove import remove
 
 import sys
 
-HELP_INFO = ("\n" +
-             "Usage: dotdesk [OPTION] [PROGRAM NAME]\n" +
-             "\n" +
-             "dotdesk is a simple utility written to create and install " +
-             ".desktop files along with their companion icons.\n" +
-             "\n" +
-             "Arguments:\n" +
-             "{:>5}{:>10}        {:<}\n".format("-i,", "--install",
-                                                "install a .desktop file.") + 
-             "{:>5}{:>10}        {:<}\n".format("-r,", "--remove",
-                                                "remove a .desktop file."))
+HELP_INFO = "\n" \
+            "Usage: dotdesk [OPTION] [PROGRAM NAME]\n" \
+            "\n" \
+            "dotdesk is a simple utility written to create and install " \
+            ".desktop files along with their companion icons.\n" \
+            "\n" \
+            "Arguments:\n" \
+            "{:>5}{:>10}        {:<}\n".format("-i,", "--install",
+                                               "install a .desktop file.") \
+            "{:>5}{:>10}        {:<}\n".format("-r,", "--remove",
+                                               "remove a .desktop file.")
 
 def main():
-
+    """ Parses any arguments entered by the user. """
     if utils.is_NOT_root_user():
-        print ("You don't have the correct privileges to run dotdesk. " +
-               "Please run as 'root' user.")
+        print "You don't have the correct privileges to run dotdesk. " \
+               "Please run as 'root' user."
         sys.exit()
 
     args = utils.get_args()

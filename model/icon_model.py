@@ -1,6 +1,7 @@
 class IconModel(object):
-    ''' This class models any icon to be installed.
-    '''
+    """
+    This class models the icon to be installed.
+    """ 
 
     ICON_THEME = "/usr/share/icons/hicolor/"
     INSTALL_DIR = ICON_THEME + "{icon_size}/apps/"

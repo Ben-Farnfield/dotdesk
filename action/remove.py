@@ -33,8 +33,8 @@ def _run_remove_desktop(program):
     """ Removes the .desktop file from its install dir. """
     utils.proc_file("remove", 
                     DotDesktopModel.INSTALL_DIR + program + ".desktop",
-                    msg=program + ".desktop removed!",
-                    error="!!Issue removing .desktop!!")
+                    program + ".desktop removed!",
+                    "!!Issue removing .desktop!!")
 
 def _run_remove_icon(program):
     """
@@ -49,6 +49,6 @@ def _run_remove_icon(program):
             tmp_path = tmp_dir + program + icon_type
             if utils.file_exists(tmp_path):
                 utils.proc_file("remove", tmp_path,
-                                msg=program + icon_type + " removed!",
-                                error="!!Issue removing icon!!")
+                                program + icon_type + " removed!",
+                                "!!Issue removing icon!!")
                 return
