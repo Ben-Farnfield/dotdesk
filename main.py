@@ -16,17 +16,17 @@ from action.remove import remove
 
 import sys
 
-HELP_INFO = "\n" \
-            "Usage: dotdesk [OPTION] [PROGRAM NAME]\n" \
-            "\n" \
-            "dotdesk is a simple utility written to create and install " \
-            ".desktop files along with their companion icons.\n" \
-            "\n" \
-            "Arguments:\n" \
-            "{:>5}{:>10}        {:<}\n".format("-i,", "--install",
-                                               "install a .desktop file.") \
-            "{:>5}{:>10}        {:<}\n".format("-r,", "--remove",
-                                               "remove a .desktop file.")
+HELP_INFO = ("\n" +
+             "Usage: dotdesk [OPTION] [PROGRAM NAME]\n" +
+             "\n" +
+             "dotdesk is a simple utility written to create and install " +
+             ".desktop files along with their companion icons.\n" +
+             "\n" +
+             "Arguments:\n" +
+             "{:>5}{:>10}        {:<}\n".format("-i,", "--install",
+                                                "install a .desktop file.") +
+             "{:>5}{:>10}        {:<}\n".format("-r,", "--remove",
+                                                "remove a .desktop file."))
 
 def main():
     """ Parses any arguments entered by the user. """

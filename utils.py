@@ -74,7 +74,7 @@ def valid_file_type(path):
             return True
     return False
 
-def proc_file(action, path, arg=None, msg=None, error=None):
+def proc_file(proc, path, arg=None, msg=None, error=None):
     """
     Write, copy and remove files.
 
@@ -85,7 +85,7 @@ def proc_file(action, path, arg=None, msg=None, error=None):
     functions of installation and removal.
 
     Keyword arguments:
-    action -- string "w" or "write", "c" or "copy", "r" or "remove"
+    proc   -- string "w" or "write", "c" or "copy", "r" or "remove"
     path   -- string representing the path to the file to be processed
     arg    -- use changes based on action:
                 - "c" or "copy"; string representing destination path
@@ -94,12 +94,12 @@ def proc_file(action, path, arg=None, msg=None, error=None):
     error  -- printed if action fails (default no msg)
     """
     try:
-        if action in ("c", "copy"):
+        if proc in ("c", "copy"):
             shutil.copyfile(path, arg)
-        elif action in ("w", "write"):
+        elif proc in ("w", "write"):
             with open(path, "w") as doc:
                 doc.write(arg)
-        elif action in ("r", "remove"):
+        elif proc in ("r", "remove"):
             os.remove(path)
         else:
             raise Exception("Invalid arg passed to action")
