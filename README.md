@@ -7,13 +7,13 @@ Open a terminal within the directory you wish to install dotdesk and run:
 ```
 git clone https://github.com/Ben-Farnfield/dotdesk.git
 cd dotdesk
-sudo ./install.py -i
+sh install.sh -i
 ```
 
 #### Remove
 Open a terminal within you dotdesk install directory and run:
 ```
-sudo ./install.py -r
+sh install.sh -r
 ```
 
 ## dotdesk usage
