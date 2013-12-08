@@ -21,5 +21,5 @@ elif [ "$1" = "-r" ]; then
         printf "dotdesk is not installed\n"
     fi
 else
-    printf "Try: 'sudo sh install.sh [-i OR -r]'\n"
+    printf "Try: 'sh install.sh [-i OR -r]'\n"
 fi
